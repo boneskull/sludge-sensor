@@ -2,12 +2,20 @@ language: python
 python:
   - "2.7"
 sudo: false
-cache:
-  directories:
-    - "~/.platformio"
+# cache:
+#   directories:
+#     - "~/.platformio"
+
+env:
+  - PLATFORMIO_CI_SRC=src/sludge-sensor.cpp PLATFORMIO_CI_BOARDS_ARGS="--board huzzah"
 
 install:
   - pip install -U platformio
+  - platformio lib --global install ConfigManager@0.5
+  - wget  https://github.com/esp8266/Arduino/releases/download/2.3.0/esp8266-2.3.0.zip -O /tmp/esp8266-2.3.0.zip
+  - unzip /tmp/esp8266-2.3.0.zip -d /tmp/
+  - mkdir -p ~/.platformio/packages/
+  - mv -f /tmp/esp8266-2.3.0 ~/.platformio/packages/framework-arduinoespressif8266
 
 script:
-  - platformio run
+  - platformio ci ${PLATFORMIO_CI_BOARDS_ARGS}
