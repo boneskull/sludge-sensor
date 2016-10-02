@@ -2,6 +2,8 @@
 
 > omg a soil moisture sensor of things
 
+![screenshot](https://cldup.com/BwBRipOWqa.jpg)
+
 ## Notes
 
 - Used [Adafruit Feather HUZZAH](https://www.adafruit.com/products/2821)
